@@ -1,0 +1,85 @@
+{
+  "author": "Ashok Gelal",
+  "identifier": "com.ashokgelal.lightpaper.Formatting",
+  "version": "0.1",
+  "minRequiredBundleVersion": 52,
+  "description": "Plugin for applying markdown formats to selected texts",
+  "authorEmail": "ashokgelal@gmail.com",
+  "name": "Markdown Formatter",
+  "commands": [
+    {
+      "script": "Format.cocoascript",
+      "handler": "formatStrong",
+      "shortcut": "cmd b",
+      "name": "Strong",
+      "identifier": "strong"
+    },
+    {
+      "script": "Format.cocoascript",
+      "handler": "formatEmphasize",
+      "shortcut": "cmd i",
+      "name": "Emphasize",
+      "identifier": "emphasize"
+    },
+    {
+      "script": "Format.cocoascript",
+      "handler": "formatUnderline",
+      "shortcut": "cmd u",
+      "name": "Underline",
+      "identifier": "underline"
+    },
+    {
+      "script": "Format.cocoascript",
+      "handler": "formatStrikethrough",
+      "name": "Strikethrough",
+      "identifier": "strikethrough"
+    },
+    {
+      "script": "Format.cocoascript",
+      "handler": "formatLink",
+      "shortcut": "ctrl shift l",
+      "name": "Link Tag",
+      "identifier": "link"
+    },
+    {
+      "script": "Format.cocoascript",
+      "handler": "formatImage",
+      "shortcut": "ctrl shift i",
+      "name": "Image Tag",
+      "identifier": "image"
+    },
+    {
+      "script": "Format.cocoascript",
+      "handler": "makeH1",
+      "name": "Convert to H1",
+      "identifier": "makeh1"
+    },
+    {
+      "script": "Format.cocoascript",
+      "handler": "makeH2",
+      "name": "Convert to H2",
+      "identifier": "makeh2"
+    },
+    {
+      "script": "Format.cocoascript",
+      "handler": "makeH3",
+      "name": "Convert to H3",
+      "identifier": "makeh3"
+    }
+  ],
+  "menu": {
+    "items": [
+      "strong",
+      "emphasize",
+      "underline",
+      "strikethrough",
+      "---",
+      "link",
+      "image",
+      "---",
+      "makeh1",
+      "makeh2",
+      "makeh3"
+    ]
+  }
+}

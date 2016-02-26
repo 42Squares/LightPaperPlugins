@@ -1,0 +1,79 @@
+
+function formatStrong(context) {
+  surroundSelectionsWith("**", "**", context);
+}
+
+function formatEmphasize(context) {
+  surroundSelectionsWith("*", "*", context);
+}
+
+function formatUnderline(context) {
+  surroundSelectionsWith("<u>", "</u>", context);
+}
+
+function formatStrikethrough(context) {
+  surroundSelectionsWith("~~", "~~", context);
+}
+
+function formatLink(context) {
+  surroundSelectionsWith("[", "]()", context);
+}
+
+function formatImage(context) {
+  surroundSelectionsWith("![", "]()", context);
+}
+
+function surroundSelectionsWith(prefix, suffix, context) {
+  var doc = context.activeDocument;
+  var selections = doc.getSelectedWords();
+  var newSelections = [];
+
+  var texts = [];
+  var selectionOffset = 0;
+  var prefixLength = prefix.length;
+  var suffixLength = suffix.length;
+  for (var i = 0; i < selections.count(); i++) {
+    var selection  = selections[i]
+    var text = prefix + selection.text() + suffix;
+    var oldRange = selection.range();
+    texts.push(text);
+    var newRange = NSMakeRange(selectionOffset + oldRange.location + prefixLength, oldRange.length);
+    newSelections.push([NSValue valueWithRange: newRange]);
+    selectionOffset += prefixLength + suffixLength;
+  }
+
+  [doc replaceSelectionsWithTexts: texts preserveSelections: false];
+  [doc setSelections: newSelections];
+}
+
+function makeH1(context) {
+  addPrefix("# ", context);
+}
+
+function makeH2(context) {
+  addPrefix("## ", context);
+}
+function makeH3(context) {
+  addPrefix("### ", context);
+}
+
+function addPrefix(prefix, context) {
+  var doc = context.activeDocument;
+  var selections = doc.getSelectedLines();
+  var newSelections = [];
+  var insertPos = [];
+
+  var texts = [];
+  var offset = 0;
+  for (var i = 0; i < selections.count(); i++) {
+    var selection  = selections[i]
+    // skip blank lines
+    if (selection.text() == "") { continue; }
+    var text = prefix + selection.text();
+    var oldRange = selection.range();
+    insertPos.push(oldRange.location);
+    texts.push(prefix);
+  }
+
+  [doc insertText:prefix atPositions:insertPos];
+}
